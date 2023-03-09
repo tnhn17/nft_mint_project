@@ -67,5 +67,18 @@ contract NFT is ERC721, Ownable {
         (bool transferTwo, ) = payable(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4).call{value: balanceTwo}(""); // %30 bakiyenin geçeceği cüzdan
         require(transferOne && transferTwo, "Transfer"); // gereklilik, kontrol
     }
+    
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        require(
+            _exists(tokenId),
+            "ERC721MetaData: URI query for nonexistent token"
+        );
+
+        string memory currentBaseURI = _baseURI();
+        return bytes(currentBaseURI).length > 0
+            ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension))
+            : "";
+    }
+
 
 }
