@@ -45,3 +45,19 @@ contract NFT is ERC721, Ownable {
         mintedPerWallet[msg.sender] += _numTokens;
         totalSupply += _numTokens;
     }
+
+
+        function flipSaleState() external onlyOwner{
+        isSaleActive = !isSaleActive;  // Satışın durmasını sadece kontrat sahibi gerçekleştirebilir
+    }
+
+    function setBaseURI(string memory _baseUri) external onlyOwner { 
+        baseUri = _baseUri; 
+    }
+
+    function setPrice(uint256 _price) external onlyOwner {
+        price = _price;  // fiyatı güncelleyebileceğimiz fonksiyon ( sadece kontrat sahibi)
+}
+
+
+}
