@@ -52,7 +52,7 @@ contract NFT is ERC721, Ownable {
     }
 
     function setBaseURI(string memory _baseUri) external onlyOwner { 
-        baseUri = _baseUri; 
+        baseUri = _baseUri;  // URI(kaynağı ve dosyaları benzersiz bir şekilde tanımlamamızı sağlar ve bu fonksiyon sayesinde değişimlerde bulunabiliriz)
     }
 
     function setPrice(uint256 _price) external onlyOwner {
