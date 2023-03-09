@@ -65,7 +65,7 @@ contract NFT is ERC721, Ownable {
         uint256 balanceTwo = balance * 30 / 100;  // bakiyenin yüzde 30'u
         (bool transferOne, ) = payable(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4).call{value: balanceOne}(""); // %70 bakiyenin geçeceği cüzdan
         (bool transferTwo, ) = payable(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4).call{value: balanceTwo}(""); // %30 bakiyenin geçeceği cüzdan
-        require(transferOne && transferTwo, "Transfer"); // gereklilik
+        require(transferOne && transferTwo, "Transfer"); // gereklilik, kontrol
     }
 
 }
