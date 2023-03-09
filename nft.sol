@@ -68,7 +68,7 @@ contract NFT is ERC721, Ownable {
         require(transferOne && transferTwo, "Transfer"); // gereklilik, kontrol
     }
     
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {  // temel fonksiyon
         require(
             _exists(tokenId),
             "ERC721MetaData: URI query for nonexistent token"
@@ -79,6 +79,12 @@ contract NFT is ERC721, Ownable {
             ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension))
             : "";
     }
+
+    // Internal Functions
+    function _baseURI() internal view virtual override returns (string memory) {  // temel URI fonksiyon
+        return baseUri;
+    }
+
 
 
 }
