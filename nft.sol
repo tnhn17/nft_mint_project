@@ -29,3 +29,19 @@ contract NFT is ERC721, Ownable {
         }
         totalSupply = TOKENS_RESERVED;
     }
+    
+        function mint(uint256 _numTokens) external payable {
+        require(isSaleActive, "The sale is paused"); // isSaleActive False olursa satış durur fonksiyonu durdurur
+        require(_numTokens <= MAX_MINT_PER_TX, "You can only mint a maximum of 10 NFTs per transaction");  // En fazla 10 tane üretilebilir 
+        require(mintedPerWallet[msg.sender] + _numTokens <= 10, "You can only mint 10 per wallet."); // cüzdan başına 10 tane
+        uint256 curTotalSupply = totalSupply;
+        require(curTotalSupply + _numTokens <= MAX_TOKENS , "Exceeds 'MAX_TOKENS'"); 
+        require(_numTokens * price <= msg.value, "Unsufficient funds you need more ETH!"); // Yetersiz ETH 
+
+
+        for (uint256 i = 1; i <= _numTokens; ++i) {
+            _safeMint(msg.sender, curTotalSupply + i);
+        }
+        mintedPerWallet[msg.sender] += _numTokens;
+        totalSupply += _numTokens;
+    }
